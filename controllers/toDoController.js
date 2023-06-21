@@ -43,6 +43,19 @@ module.exports.updateCompleted = (req, res) => {
         });
 };
 
+module.exports.updateUncompleted = (req, res) => {
+    const { id } = req.params;
+
+    toDoModel.findByIdAndUpdate(id, {
+        completed: 'false'
+    })
+        .then(() => res.send("Task Updated Successfully"))
+        .catch((err) => {
+            console.log(err);
+            res.send({ error: err, msg: "Error Updating Task" });
+        });
+};
+
 module.exports.deleteToDo = (req, res) => {
     const { id } = req.params;
 
